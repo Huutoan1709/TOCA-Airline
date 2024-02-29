@@ -1,0 +1,29 @@
+<header class="header">
+    <a href="/">
+        <div class="logo">
+            <img class="logo-img" src="/static/images/logo.png" alt="">
+            <span>TOCA Airline</span>
+        </div>
+    </a>
+    <ul class="navigator">
+        <li><a href="/">Trang chủ</a></li>
+        <li>Về chúng tôi</li>
+        <li>Hỗ trợ</li>
+        <li>Dịch vụ khác</li>
+        <li><a href="/history">Lịch sử đặt vé</a></li>
+    </ul>
+    <div class="actions">
+        {% if not current_user.is_authenticated %}
+            <button class="btn secondary login " onclick="openLoginModal()">Đăng nhập/Đăng ký</button>
+        {% else %}
+            <a href="/logout" class="btn logout">Đăng xuất</a>
+            <a href="/profile" class="username">
+                {{ current_user.name }}
+                <img src="{{ current_user.avatar }}" alt="avatar" class="avatar">
+            </a>
+        {% endif %}
+
+    </div>
+
+    {% include '/layout/components/modals.html' %}
+</header>

@@ -1,0 +1,36 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+    <div class="history">
+        <h3>Lịch sử đặt vé</h3>
+        <ul class="ticket-list">
+            {% if tickets %}
+                {% for t in tickets %}
+                    <li class="ticket-item {{ t.hangve.name }}">
+                        <div class="header"><i class="small-text">Toca Airline</i> - <strong>{{ t.hangve.name }}</strong></div>
+                        <div class="body">
+                            <div class="customer-info">
+                                <span>Mã vé: {{ t.id }}</span>
+                                <span>Chuyến bay: <strong>{{ t.chuyenbay.name }}</strong></span>
+                                <span>Họ tên: <strong>{{ t.hanhkhach.name }}</strong></span>
+                            </div>
+                            <div class="from">
+                                <span>FROM</span>
+                                <span>Nơi đi: <strong>{{ t.chuyenbay.tuyenbay.sanbaydi.name }}</strong></span>
+                                <span>Thời gian bay: <strong>{{ t.chuyenbay.gio_bay }}</strong></span>
+                            </div>
+                            <div class="to">
+                                <span>TO</span>
+                                <span>Nơi đến: <strong>{{ t.chuyenbay.tuyenbay.sanbayden.name }}</strong></span>
+                                <span>Thời gian đến: <strong>{{ t.chuyenbay.gio_den }}</strong></span>
+                            </div>
+                        </div>
+                        <div class="footer"></div>
+                    </li>
+                {% endfor %}
+
+            {% else %}
+            <h3 class="text-center">( Bạn chưa thực hiện đặt vé cho chuyến bay nào ) </h3>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}

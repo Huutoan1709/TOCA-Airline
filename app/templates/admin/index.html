@@ -1,0 +1,152 @@
+{% extends 'admin/master.html' %}
+{% block head_css %}
+    {{ super() }}
+    <link rel="icon" href="{{ url_for('static', filename='images/logo-web.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo-web.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}
+    <div class="home-admin p-5 d-flex justify-content-center align-items-center ">
+        {% if current_user.is_authenticated %}
+            <div class="p-5 rounded welcome">
+                <span>TOCA Airline</span>
+                <h2 class=" mt-4">WELCOME TO OUR ADMINISTRATOR PAGE</h2>
+                <p class="mt-4">Thông tin người dùng</p>
+                <p>Tên đăng nhập: <span>{{ current_user.name }}</span></p>
+                <p>Vai trò: <span>{{ current_user.role.value }}</span></p>
+            </div>
+
+
+        {% else %}
+            <section class="auth login ">
+                <form action="{{ url_for('login') }}" class="login-form px-5 py-4 rounded" method="post"
+                      style="width: 600px">
+                    <h2 class="text-dark">Đăng nhập</h2>
+                    <div class="form-group mt-3">
+                        <label for="email">Username:</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Enter username"
+                                id="email"
+                                name="username"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        <input
+                                type="password"
+                                class="form-control"
+                                placeholder="Enter password"
+                                id="pwd"
+                                name="password"
+                        />
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox"/> Show password
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2 px-5">Đăng nhập</button>
+                    <div>
+                        Chưa có tài khoản
+                        <button type="button" class="btn btn-link " onclick="switchForm()">Đăng kí</button>
+                    </div>
+                </form>
+
+                <form action="{{ url_for('register') }}" class="register-form hide px-5 py-4 rounded" method="post"
+                      style="width: 600px;">
+                    <h2 class="text-dark">Đăng kí</h2>
+                    <div class="form-group mt-3">
+                        <label for="name">Name:</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Enter username"
+                                id="name"
+                                name="name"
+                        />
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="name">Avatar:</label>
+                        <input
+                                type="file"
+                                class="form-control"
+                                id="name"
+                                name="avatar"
+                        />
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="re-username">Username:</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Enter username"
+                                id="re-username"
+                                name="username"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="re-email">Email:</label>
+                        <input
+                                type="email"
+                                class="form-control"
+                                placeholder="Enter email"
+                                id="re-email"
+                                name="email"
+                        />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="re-pwd">Password:</label>
+                        <input
+                                type="password"
+                                class="form-control"
+                                placeholder="Enter password"
+                                id="re-pwd"
+                                name="password"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="re-pwd-again">Confirm password:</label>
+                        <input
+                                type="password"
+                                class="form-control"
+                                placeholder="Enter password again"
+                                id="re-pwd-again"
+                                name="confirm_pw"
+                        />
+                        <span class="text-danger">{{ pw_error }}</span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox"/> Show password
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2 px-5">Đăng kí</button>
+                    <div>
+                        Đã có tài khoản
+                        <button type="button" class="btn btn-link" onclick="switchForm()">Đăng nhập</button>
+                    </div>
+                </form>
+            </section>
+
+        {% endif %}
+    </div>
+{% endblock %}
+{% block tail_js %}
+    <script>
+        const login = document.querySelector('.login-form')
+        const register = document.querySelector('.register-form')
+
+        function switchForm() {
+            login.classList.toggle('hide')
+            register.classList.toggle('hide')
+        }
+    </script>
+{% endblock %}

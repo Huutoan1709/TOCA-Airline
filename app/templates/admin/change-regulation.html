@@ -1,0 +1,107 @@
+{% extends 'admin/base-admin.html' %}
+
+{% block content %}
+<div class="change-regulation">
+    <div class="airport-reg">
+        <h3>Quy định về sân bay</h3>
+        <div class="regulation-wrapper">
+            <div class="regulation-item">
+                <label>Danh sách sân bay (<span>10</span> sân bay)</label>
+                <div>
+                    <button class="btn secondary">+ Thêm</button>
+                    <button class="btn secondary">Chi tiết</button>
+                </div>
+            </div>
+            <div class="regulation-item">
+                <label>Thời gian bay tối thiểu</label>
+                <div>
+                    <input type="number" name="" value="30"> <span>phút</span>
+                </div>
+
+            </div>
+            <div class="regulation-item">
+                <label>Số sân bay trung gian tối đa</label>
+                <div>
+                    <input type="number" name=""  value="2"> <span>sân</span>
+                </div>
+
+            </div>
+            <div class="regulation-item">
+                <label>Thời gian dừng tối thiểu</label>
+                <div>
+                    <input type="number" name="" value="20"> <span>phút</span>
+                </div>
+
+            </div>
+            <div class="regulation-item">
+                <label>Thời gian dừng tối đa</label>
+                <div>
+                    <input type="number" name=""  value="30"> <span>phút</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="ticket-reg">
+        <h3>Quy định về vé</h3>
+        <div class="regulation-wrapper">
+            <div class="regulation-item">
+                <label>Số lượng hạn vé</label>
+                <div class="ticket-type quantity">
+                    <div>
+                        Hạng vé 1 (Luxury)
+                        <div>
+                            <input type="number" name="" value="10"> <span>vé</span>
+                        </div>
+                    </div>
+                    <div >
+                        Hạng vé 2 (Classic)
+                        <div>
+                            <input type="number" name=""  value="40"> <span>vé</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="regulation-item">
+                <label>Đơn giá vé</label>
+                <div class="ticket-type">
+                    <div>
+                        Hạng vé 1 (Luxury)
+                        <div>
+                        <input type="number" name=""  value="1000000"> <span>VND</span>
+                        </div>
+                    </div>
+                    <div>
+                        Hạng vé 2 (Classic)
+                        <div>
+                        <input type="number" name=""  value="500000"> <span>VND</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="time-reg">
+        <h3>Quy định về thời gian</h3>
+        <div class="regulation-wrapper">
+            <div class="regulation-item">
+                <label>Thời gian bán vé: </label>
+                <div>
+                    trước <input type="number" name=""  value="20"> <span>phút</span>
+                </div>
+
+            </div>
+            <div class="regulation-item">
+                <label>Thời gian đặt vé: </label>
+                <div>
+                    trước <input type="number" name=""  value="30"> <span>phút</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

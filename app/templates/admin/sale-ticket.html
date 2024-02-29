@@ -1,0 +1,292 @@
+{% extends 'admin/base-admin.html' %}
+
+{% block content %}
+    <div class="sale-ticket">
+
+        <div class="search-flight">
+            <form class="search">
+                <div class="location">
+                    <label for="from-location">Địa điểm</label>
+                    <div class="input-wrapper">
+
+                        <div class="dropdown" id="from-location">
+                            <div class="dropdown-select">
+                                <input type="text" name="from-location" placeholder="From" class="dropdown-value">
+                                <i class="fi fi-rs-angle-down"></i>
+                            </div>
+                            <div class="dropdown-list">
+                                {% for a in airports %}
+                                    <div class="dropdown-item" data-code="{{ a.name }}">{{ a.name }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <i class="fi fi-ss-plane"></i>
+
+                        <div class="dropdown" id="to-location">
+                            <div class="dropdown-select">
+                                <input type="text" name="to-location" placeholder="To" class="dropdown-value">
+                                <i class="fi fi-rs-angle-down"></i>
+                            </div>
+                            <div class="dropdown-list">
+                                {% for a in airports %}
+                                    <div class="dropdown-item" data-code="{{ a.name }}">{{ a.name }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="time">
+                    <label for="date-input">Ngày đi</label>
+                    <div>
+                        <input type="date" id="date-input" name="flight-date">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn primary">TÌM KIẾM</button>
+            </form>
+        </div>
+
+        {% set flights = all_flights if not flights else flights %}
+        {% if flights %}
+            <div class="select-flight">
+                <h3>Danh sách chuyến bay</h3>
+                <ul class="flight-list mt-5">
+                    {% for f in flights %}
+                        <li class="flight-item align-items-center">
+                            <div class="brief-info py-2">
+                                <div class="d-flex justify-content-between p-1 align-items-center time">
+                                    <span class="text-center px-3">{{ f.gio_bay }}<br> {{ f.tuyenbay.sanbaydi.name }}</span>
+                                    -
+                                    <span class="text-center px-3">{{ f.gio_den }} <br>{{ f.tuyenbay.sanbayden.name }}</span>
+                                </div>
+                                <span class="plane">{{ f.maybay.name }}</span>
+                            </div>
+                            {% for c in ticket_classes %}
+
+                                <label
+                                            for="{{ f.id|string + c.name }}"
+                                            class="class-wrapper {% if f.ghes[loop.index - 1]['so_luong']<=0 %}sold{% endif %}"
+                                            onclick="showDetail('{{ f.id }}', '{{ c.id }}')"
+                                    >
+                                        <input type="radio" name="flight" id="{{ f.id|string + c.name }}"
+                                                {% if f.id==flight.id and c.id==ticket_class.id %} checked {% endif %}
+                                        >
+                                        <div class="{{ c.name }} class {% if f.ghes[loop.index - 1]['so_luong']<=0 %}sold{% endif %}">
+                                            {{ "{:,.1f}".format( c.gia + f.gia) }} VND
+                                        </div>
+                                    </label>
+                            {% endfor %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% if flight and ticket_class %}
+            <div class="d-flex mt-5 payment ">
+                <div class="passenger-info {% if user %}hide{% endif %}">
+                    <h3>Thông tin khách hàng</h3>
+                    <form action="/admin/saleview?flight={{ flight.id }}&ticket-class={{ ticket_class.id }}"
+                          class="passenger-form mt-5" method="post">
+                        <div class="personal">
+                            <h3>Thông tin cá nhân</h3>
+                            <div>
+                                <div class="type">
+                                    <div>
+                                        <input type="radio" name="adult" id="adult" value=1 checked>
+                                        <label for="adult">Người lớn</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="adult" id="child" value=0>
+                                        <label for="child">Trẻ em</label>
+                                    </div>
+                                </div>
+
+                                <div class="gender">
+                                    <span>Giới tính: </span>
+                                    <div>
+                                        <input type="radio" name="gender" value="NAM" id="male" checked>
+                                        <label for="male">Nam</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="gender" value="NU" id="female">
+                                        <label for="female">Nữ</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="gender" value="ORTHER" id="others">
+                                        <label for="others">Khác</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="form-group half">
+                                    <label for="last-name">Họ</label>
+                                    <input type="text" name="lname" id="last-name" placeholder="VD: Nguyen">
+                                </div>
+                                <div class="form-group half">
+                                    <label for="first-name">Tên</label>
+                                    <input type="text" name="fname" id="first-name" placeholder="VD: Toan">
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="form-group half">
+                                    <label for="date-of-birth">Ngày sinh</label>
+                                    <input type="date" name="dob" id="date-of-birth">
+                                </div>
+                                <div class="form-group half">
+                                    <label for="nationality">Quốc tịch</label>
+
+                                    <div class="dropdown" id="nationality">
+                                        <div class="dropdown-select">
+                                            <input type="text" name="nationality" placeholder="Chọn quốc tịch"
+                                                   class="dropdown-value">
+                                            <i class="fi fi-rs-angle-down"></i>
+                                        </div>
+                                        <div class="dropdown-list">
+                                            <div data-code="Việt Nam" class="dropdown-item">Việt Nam</div>
+                                            <div data-code="Mỹ" class="dropdown-item">Mỹ</div>
+                                            <div data-code="Anh" class="dropdown-item">Anh</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact">
+                            <h3>Thông tin liên lạc</h3>
+                            <div class="">
+                                <div class="form-group half">
+                                    <label for="phone">Số điện thoại</label>
+                                    <input type="tel" name="phone" id="phone" placeholder="xxxx-xxx-xxx">
+                                </div>
+                                <div class="form-group half">
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" id="email" placeholder="example@gmail.com">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Địa chỉ</label>
+                                <input type="text" name="address" id="address"
+                                       placeholder="1454 Le Van Luong, Nha Be, Ho Chi Minh">
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end mt-4">
+                            <button type="submit" class="btn primary ">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+                {% if user %}
+                    <div class="payment-info">
+                        <h3>Thông tin thanh toán</h3>
+                        <div class="mt-5">
+                            <a href="/payment-result?bill_id={{ bill.id }}&paid-code=00&next=admin/saleview/"
+                               type="submit" class="btn btn-default btn-warning mr-3 text-dark">Thanh toán tiền mặt</a>
+                            <button class="btn btn-primary" onclick="showOrderForm()">Thanh toán với VNPAY</button>
+                        </div>
+
+                        <form action="/payment?bill_id={{ bill.id }}" id="frmCreateOrder" method="post"
+                              class="mt-5 mr-4 p-5 bg-light border hide">
+                            <div class="form-group">
+                                <label for="language">Loại thanh toán </label>
+                                <select name="order_type" id="order_ype" class="form-control">
+                                    <option value="billpayment" selected>Thanh toán hoá đơn</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Amount">Số tiền</label>
+                                <input class="form-control" data-val="true"
+                                       data-val-number="The field Amount must be a number."
+                                       data-val-required="The Amount field is required." id="Amount" name="amount"
+                                       type="text" value="{{ bill.tong_hoa_don|int }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="OrderDescription">Nội dung thanh toán</label>
+                                <textarea class="form-control" cols="20" id="OrderDescription" name="order_desc"
+                                          rows="2">Thanh toan ve ma bay cho hoa don {{ bill.id }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="bankcode">Ngân hàng</label>
+                                <select name="bank_code" id="bankcode" class="form-control">
+                                    <option value="">Không chọn</option>
+                                    <option value="MBAPP">Ung dung MobileBanking</option>
+                                    <option value="VNPAYQR">VNPAYQR</option>
+                                    <option value="VNBANK">LOCAL BANK</option>
+                                    <option value="IB">INTERNET BANKING</option>
+                                    <option value="ATM">ATM CARD</option>
+                                    <option value="INTCARD">INTERNATIONAL CARD</option>
+                                    <option value="VISA">VISA</option>
+                                    <option value="MASTERCARD"> MASTERCARD</option>
+                                    <option value="JCB">JCB</option>
+                                    <option value="UPI">UPI</option>
+                                    <option value="VIB">VIB</option>
+                                    <option value="VIETCAPITALBANK">VIETCAPITALBANK</option>
+                                    <option value="SCB">Ngan hang SCB</option>
+                                    <option value="NCB">Ngan hang NCB</option>
+                                    <option value="SACOMBANK">Ngan hang SacomBank</option>
+                                    <option value="EXIMBANK">Ngan hang EximBank</option>
+                                    <option value="MSBANK">Ngan hang MSBANK</option>
+                                    <option value="NAMABANK">Ngan hang NamABank</option>
+                                    <option value="VNMART"> Vi dien tu VnMart</option>
+                                    <option value="VIETINBANK">Ngan hang Vietinbank</option>
+                                    <option value="VIETCOMBANK">Ngan hang VCB</option>
+                                    <option value="HDBANK">Ngan hang HDBank</option>
+                                    <option value="DONGABANK">Ngan hang Dong A</option>
+                                    <option value="TPBANK">Ngân hàng TPBank</option>
+                                    <option value="OJB">Ngân hàng OceanBank</option>
+                                    <option value="BIDV">Ngân hàng BIDV</option>
+                                    <option value="TECHCOMBANK">Ngân hàng Techcombank</option>
+                                    <option value="VPBANK">Ngan hang VPBank</option>
+                                    <option value="AGRIBANK">Ngan hang Agribank</option>
+                                    <option value="MBBANK">Ngan hang MBBank</option>
+                                    <option value="ACB">Ngan hang ACB</option>
+                                    <option value="OCB">Ngan hang OCB</option>
+                                    <option value="IVB">Ngan hang IVB</option>
+                                    <option value="SHB">Ngan hang SHB</option>
+                                    <option value="APPLEPAY">Apple Pay</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="language">Ngôn ngữ</label>
+                                <select name="language" id="language" class="form-control">
+                                    <option value="vn">Tiếng Việt</option>
+                                    <option value="en">English</option>
+                                </select>
+                            </div>
+
+                            {% if current_user.is_authenticated %}
+                                <button type="submit" class="btn primary btn-default mt-5">Thanh toán</button>
+                            {% endif %}
+                            <input name="__RequestVerificationToken" type="hidden"
+                                   value="Y0dUy_D81Ad-MaB0d22ZElT0tw_ImXJPsZgn6r5bpL676JqmouRgwUovbbnufVOw02mfCWGDJz7j72Z6a26hEVSS8f6OtO8Knx1rit6rz101">
+                        </form>
+                    </div>
+                {% endif %}
+                <div class="bill">
+                    <h3>Thông tin hoá đơn</h3>
+                    <ul>
+                        <li>Tiền vé <span class="qty">x1</span><span
+                                class="money">{{ "{:,.1f}".format((flight.gia + ticket_class.gia) ) }} VND</span>
+                        </li>
+                        <li>Tiền thuế (8%): <span
+                                class="money">{{ "{:,.1f}".format( 0.08 * (flight.gia + ticket_class.gia) ) }} VND</span>
+                        </li>
+                        <li class="total">Tổng: <span
+                                class="money">{{ "{:,.1f}".format( 1.08 * (flight.gia + ticket_class.gia)) }} VND</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+
+
+    </div>
+
+    <script>
+
+    </script>
+{% endblock %}

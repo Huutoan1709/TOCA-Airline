@@ -1,0 +1,446 @@
+@import url('https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
+
+.home-admin {
+    background-image: url("https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-size: cover;
+    min-height: 90vh;
+}
+
+.welcome {
+    backdrop-filter: blur(50px);
+    color: var(--white);
+    font-size: 18px;
+}
+
+.container {
+    max-width: 85%;
+}
+
+
+.auth form {
+    background-color: #F1F1EF;
+    max-height: 80vh;
+    overflow: auto;
+}
+
+.home-admin h2 {
+    color: #004038;
+
+}
+
+.auth form::-webkit-scrollbar {
+    visibility: hidden;
+}
+.sale-ticket input {
+    padding: 8px 16px;
+}
+.search-flight {
+    margin-top: 60px;
+    background-color: var(--light-bg);
+    padding: 40px 60px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2);
+}
+
+.search-flight .search {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12px;
+    padding: 20px;
+}
+
+.search-flight .search label {
+    display: inline-block;
+    margin-bottom: 16px;
+}
+
+.search-flight .location .input-wrapper {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+
+.search-flight .location i {
+    color: var(--main-text);
+    font-size: 24px;
+    height: 20px;
+}
+
+.search-flight .time input {
+    width: 240px;
+}
+
+/*select flight*/
+
+.select-flight {
+    margin-top: 60px;
+}
+.flight-list {
+    margin-top: 24px;
+}
+
+.flight-item .brief-info {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--dark-text);
+    border-radius: 4px;
+}
+
+.flight-item {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flight-item + .flight-item {
+    margin-top: 12px;
+}
+
+.flight-item .class.chosen {
+
+}
+
+.flight-item .time {
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.flight-item .plane {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.flight-item .class-wrapper {
+    height: 80px;
+    flex: 1;
+    width: auto;
+    font-weight: 700;
+    font-size: 20px;
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    margin: 0;
+}
+
+.class-wrapper input:checked + .class {
+    border: 2px solid currentColor;
+    box-shadow: 0 0 10px 2px currentColor;
+}
+
+.class-wrapper .class {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background-color: #cccccc;
+}
+
+.class-wrapper input {
+    width: 1px;
+    height: 1px;
+    visibility: hidden;
+}
+
+.flight-item .luxury {
+    background-color: var(--gold-bg);
+    color: var(--gold-text);
+}
+
+.flight-item .classic {
+    background-color: var(--main-bg);
+    color: var(--dark-text);
+}
+.class-wrapper.sold {
+    pointer-events: none !important;
+}
+.flight-item .class.sold {
+    background-color: #eee;
+    color: #333;
+    pointer-events: none;
+
+}
+
+.flight-item .class.sold::before {
+    content: 'Không đủ vé';
+    background-color: #333;
+    color: #eee;
+}
+
+
+.flight-item .class::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 18px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 4px 0 4px 0;
+}
+
+.flight-item .luxury::before {
+    content: 'Luxury';
+    color: var(--white);
+    background-color: var(--gold-text);
+}
+
+.flight-item .classic::before {
+    content: 'Classic';
+    color: var(--white);
+    background-color: var(--dark-bg);
+}
+
+/*bill*/
+
+.payment .bill {
+    padding: 0 30px;
+    width: 35%;
+}
+
+.payment .bill ul{
+    margin-top: 60px;
+}
+
+.payment .bill li {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.payment .bill .qty {
+    font-weight: 600;
+}
+
+.payment .bill .total {
+    padding-top: 12px;
+    border-top: 1px dashed #ccc ;
+}
+
+.payment .bill .money {
+    font-weight: 600;
+    color: red;
+}
+
+/*passenger form*/
+ .passenger-info, .payment-info {
+     flex: 1;
+ }
+
+ .passenger-info .form-group.half {
+     width: 48%;
+ }
+.passenger-info form {
+    margin-top: 16px;
+    padding: 40px 60px;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2);
+    background-color: var(--light-bg);
+}
+
+.personal {
+    padding: 12px 0 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.personal>div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact {
+    padding: 12px 0;
+    border-top: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.personal h3,
+.contact h3 {
+    margin-top: 16px;
+    font-size: 18px;
+}
+
+#nationality {
+    width: 100%;
+}
+
+.passenger-info .type,
+.passenger-info .gender {
+
+    display: flex;
+    gap: 12px;
+}
+
+.contact>div {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+footer {
+    padding: 20px 40px;
+    background-color: var(--dark-bg);
+    color: var(--white);
+    margin-top: 40px;
+    font-size: 14px;
+}
+
+
+/*chart*/
+.chart {
+    max-width: 600px ;
+    margin-top: 60px;
+}
+
+.stats-type {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    margin-top: 40px;
+}
+
+
+.stats-filter {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.stats-filter label {
+    margin: 0;
+}
+
+.stats-filter .to .chose-date {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+}
+
+.stats-filter input[type='radio'] {
+    margin-right: 4px;
+}
+
+#to-date + label {
+    pointer-events: none;
+    opacity: 0.6;
+}
+#to-date:checked + label {
+    pointer-events: auto;
+    opacity: 1;
+}
+.switch-chart {
+    background-color: var(--light-bg);
+    width: 340px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-inline: auto;
+    margin-top: 20px;
+}
+
+.switch-chart input {
+    visibility: hidden;
+    width: 1px;
+    height: 1px;
+}
+
+.switch-chart label {
+    width: 150px ;
+    padding: 6px 12px;
+    text-align: center;
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+.switch-chart input:checked + label {
+    background-color: var(--dark-bg);
+    color: var(--white);
+}
+
+/*change regulation*/
+.change-regulation {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 40px;
+}
+
+.change-regulation input {
+    margin-right: 8px;
+    padding: 6px 12px;
+}
+.change-regulation input+span {
+    width: 40px;
+    display: inline-block;
+    /*text-align: right;*/
+}
+
+.change-regulation label {
+    margin: 0;
+}
+
+.change-regulation h3 {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.regulation-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 100px;
+    margin-top: 20px;
+}
+
+.airport-reg .regulation-item,
+.time-reg .regulation-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ticket-reg .regulation-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ticket-reg .ticket-type {
+    padding-left: 60px;
+}
+
+.ticket-reg .ticket-type>div{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.airport-reg input,
+.time-reg input,
+.ticket-type.quantity input
+{
+    width: 100px;
+}
+
+/*schedule*/
+.term {
+    display: none;
+}
+
+input[type='radio']:checked + .term {
+    display: block;
+}

@@ -1,0 +1,115 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+    <div>
+        <section class="main">
+            {% include '/layout/components/flight-search-readonly.html' %}
+
+
+            <div class="passenger-info">
+                <div class="flex">
+                    <h3>Thông tin khách hàng </h3>
+                    <h4>{{ cusomer_left }} còn lại</h4>
+                </div>
+
+                <form action="/passenger-info" class="passenger-form {{ 'disabled' if (cusomer_left|int)<=0}}" method="post" >
+                    <div class="personal">
+                        <h3>Thông tin cá nhân</h3>
+                        <div>
+                            <div class="type">
+                                <div>
+                                    <input type="radio" name="adult" id="adult" value=1 checked>
+                                    <label for="adult">Người lớn</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="adult" id="child" value=0>
+                                    <label for="child">Trẻ em</label>
+                                </div>
+                            </div>
+
+                            <div class="gender">
+                                <span>Giới tính: </span>
+                                <div>
+                                    <input type="radio" name="gender" value="NAM" id="male" checked>
+                                    <label for="male">Nam</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="gender" value="NU" id="female">
+                                    <label for="female">Nữ</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="gender" value="ORTHER" id="others">
+                                    <label for="others">Khác</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="form-group half">
+                                <label for="last-name">Họ</label>
+                                <input type="text" name="lname" id="last-name" placeholder="VD: Nguyen">
+                            </div>
+                            <div class="form-group half">
+                                <label for="first-name">Tên</label>
+                                <input type="text" name="fname" id="first-name" placeholder="VD: Toan">
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="form-group half">
+                                <label for="date-of-birth">Ngày sinh</label>
+                                <input type="date" name="dob" id="date-of-birth">
+                            </div>
+                            <div class="form-group half">
+                                <label for="nationality">Quốc tịch</label>
+
+                                <div class="dropdown" id="nationality">
+                                    <div class="dropdown-select">
+                                        <input type="text" name="nationality" placeholder="Chọn quốc tịch"
+                                               class="dropdown-value">
+                                        <i class="fi fi-rs-angle-down"></i>
+                                    </div>
+                                    <div class="dropdown-list">
+                                        <div data-code="Việt Nam" class="dropdown-item">Việt Nam</div>
+                                        <div data-code="Mỹ" class="dropdown-item">Mỹ</div>
+                                        <div data-code="Anh" class="dropdown-item">Anh</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact">
+                        <h3>Thông tin liên lạc</h3>
+                        <div class="">
+                            <div class="form-group half">
+                                <label for="phone">Số điện thoại</label>
+                                <input type="tel" name="phone" id="phone" placeholder="xxxx-xxx-xxx">
+                            </div>
+                            <div class="form-group half">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" placeholder="example@gmail.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Địa chỉ</label>
+                            <input type="text" name="address" id="address"
+                                   placeholder="1454 Le Van Luong, Nha Be, Ho Chi Minh">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn primary">Lưu</button>
+                </form>
+
+            </div>
+
+            <div class="page-nav">
+                <a href="/" class="btn secondary">Quay lại</a>
+                <a href="/payment" class="btn primary {{ 'disabled' if (cusomer_left|int) > 0}}">Thanh toán</a>
+            </div>
+
+
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

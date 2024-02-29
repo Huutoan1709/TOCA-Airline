@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TOCA Airline</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/logo-web.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo-web.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+{% include '/layout/header.html' %}
+
+<form action="/profile" enctype="multipart/form-data" method="post" class="profile">
+    <div class="avatar">
+            <img src="{{ current_user.avatar }}" alt="">
+            <input class="custom-file-input" type="file" name="avatar">
+            <strong>@{{ current_user.username }}</strong>
+    </div>
+    <div class="infor">
+        <div>
+            <h3>Thông tin người dùng</h3>
+            <a href="/profile?edit=true" class="btn"><i class="fi fi-rr-file-edit"></i></a>
+        </div>
+        <div>
+            <span class="label">Họ Tên:</span>
+            <input type="text" name="name" class="value" value="{{ current_user.name }}" {{ 'readonly' if not edit }} >
+        </div>
+        <div>
+            <span class="label">Giới tính: </span>
+            <input type="text" name="gender" class="value" value="{{ current_user.gioi_tinh.value }}" {{ 'readonly' if not edit }} >
+        </div>
+        <div>
+            <span class="label">Email: </span>
+            <input type="text" name="email" class="value" value="{{ current_user.email }}" {{ 'readonly' if not edit }} >
+
+        </div>
+        <div>
+            <span class="label">Số điện thoại:</span>
+            <input type="text" name="phone" class="value" value="{{ current_user.phone }}" {{ 'readonly' if not edit }} >
+        </div>
+        <div>
+            <span class="label">Ngày sinh: </span>
+            <input type="date" name="dob" class="value" value="{{ current_user.ngay_sinh.strftime("%Y-%m-%d") if current_user.ngay_sinh }}" {{ 'readonly' if not edit }} >
+        </div>
+        <div>
+            <span></span>
+            <button type="submit" class="btn primary">Lưu</button>
+        </div>
+    </div>
+</form>
+{% include '/layout/footer.html' %}
+{% include '/layout/components/flash-message.html' %}
+
+</div>
+
+</body>
+</html>

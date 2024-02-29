@@ -1,0 +1,174 @@
+{% extends 'admin/base-admin.html' %}
+
+{% block content %}
+    <div class="schedule mt-5">
+        <h3>Danh sách chuyến bay cần lập lịch</h3>
+
+        <ul class="list-group mt-5">
+            {% if not scheduled_flights[0] %}
+                <div class="text-center">
+
+                    <img src="{{ url_for('static', filename='/images/thumbnail.jfif') }}" alt="" width="300"
+                         height="300">
+                    <h4 class="text-success my-5" role="alert">Không tồn tại chuyến bay nào cần lập lịch</h4>
+                </div>
+            {% endif %}
+
+            {% for f in scheduled_flights %}
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                    <div>{{ f.name }}</div>
+                    <div>{{ f.gio_bay }}</div>
+                    <div>{{ f.gio_den }}</div>
+                    <div>{{ f.gia }} VND</div>
+
+                    <div>
+                        <a onclick="done(`?flight-id={{ f.id }}&done=true`)" class="btn btn-success mr-3">Hoàn thành</a>
+
+                        <a href="?flight-id={{ f.id }}" class="btn btn-dark">
+                            <i class="fi fi-rr-file-edit"></i> <span class="ml-2">Edit</span>
+                        </a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% if flight %}
+            <div class="modal fade show" id="modal" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-keyboard="false"
+                 style="display: block;opacity: 1; background-color: rgba(0, 0, 0,0.5)"
+            >
+                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
+                    <div class="modal-content p-4" style="width: 800px">
+
+                        {% if flight %}
+                            <div class="modal-header p-3">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Lập lịch cho chuyến
+                                    bay {{ flight.id }} -
+                                    Tuyến: {{ flight.tuyenbay }} </h5>
+                            </div>
+                            <div class="modal-body p-3">
+                                <form class="" action="/admin/scheduleview?flight-id={{ flight.id }}" method="post">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Ngày giờ khởi hành</label>
+                                            <input type="datetime-local" class="form-control"
+                                                   name="flight-from-date"
+                                                   value="{{ flight.gio_bay }}">
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label>Ngày giờ đến</label>
+                                            <input type="datetime-local" class="form-control" name="flight-to-date"
+                                                   value="{{ flight.gio_den }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="">Giá chặng bay</label>
+                                        <input type="number" name="flight-price" class="form-control"
+                                               placeholder="VND"
+                                               value="{{ flight.gia }}">
+                                    </div>
+
+                                    <div class="form-row">
+                                        {% for c in ticket_classes %}
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleInputEmail1">Số lượng ghế
+                                                    hạng {{ c.name }}</label>
+                                                <input name="flight-seat-num" type="number" class="form-control"
+                                                       value="{{ seats[loop.index - 1].so_luong if seats[loop.index - 1] else 0 }}">
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <div>
+                                        <label for="">Sân bay trung gian</label>
+                                        <input class="hide" type="radio" name="" id="" checked>
+                                        {% for i in range(max_term) %}
+                                            <div class="mt-2 form-group term"
+                                                    {% if terms[i] %}
+                                                 style="display: block"
+                                                    {% endif %}
+                                            >
+                                                <div class="d-flex">
+                                                    <select class="form-control mr-2" name="term-id" value="0">
+                                                        <option class="hide" value="0">Chọn sân bay trung gian
+
+                                                        {% for s in airports %}
+                                                            {% if flight.tuyenbay.sanbaydi.id != s.id and  flight.tuyenbay.sanbayden.id != s.id %}
+                                                                <option value="{{ s.id }}"
+                                                                        {% if terms[i] and s.id == terms[i].sanbay_id %}
+                                                                        selected {% endif %}
+                                                                >{{ s.name }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        </option>
+
+                                                    </select>
+                                                    <input type="number" class="form-control mr-2"
+                                                           name="term-time"
+                                                           placeholder="Thời gian dừng"
+                                                           value="{{ terms[i].thoi_gian_dung|int if terms[i] else 0 }}"
+
+                                                    >
+                                                    <input type="text" class="form-control" name="term-note"
+                                                           placeholder="Ghi chú"
+                                                           value="{{ terms[i].ghi_chu if terms[i] }}"
+                                                    >
+                                                    <label for="{{ i }}"
+                                                           class="ml-3 bg-light border px-3 pb-1 pt-2">
+                                                        <i class="fi fi-rr-plus"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <input class="hide" type="radio" id="{{ i }}">
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="d-flex justify-content-end pt-3">
+
+                                        <a class="btn btn-dark mr-3" href="javascript:void(0);" onclick="goBack()">Đóng</a>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+    <script>
+        function done(next) {
+            done = confirm('Bạn chắc chắn muốn lưu?')
+            if (done) {
+                window.location.href += next
+            }
+        }
+
+        function goBack() {
+            var currentUrl = window.location.href;
+
+            var newUrl = removeUrlParameter(currentUrl, 'flight-id');
+
+            window.location.href = newUrl;
+        }
+
+        function removeUrlParameter(url, parameter) {
+            var urlObject = new URL(url);
+
+            urlObject.searchParams.delete(parameter);
+
+            return urlObject.href;
+        }
+
+        {% if flight %}
+            window.onload = function () {
+                $('#modal').modal('show');
+            }
+        {% endif %}
+    </script>
+{% endblock %}

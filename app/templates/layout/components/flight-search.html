@@ -1,0 +1,49 @@
+<div class="search-flight  search-flight-home">
+    <div class="greeting">Xin chào! Địa điểm bạn muốn đến là gì?</div>
+    <form action="/select-flight" class="search">
+        <div class="location">
+            <label for="from-location">Địa điểm</label>
+            <div class="input-wrapper">
+
+                <div class="dropdown" id="from-location">
+                    <div class="dropdown-select">
+                        <input type="text" name="from-location" placeholder="From" class="dropdown-value">
+                        <i class="fi fi-rs-angle-down"></i>
+                    </div>
+                    <div class="dropdown-list">
+                        {% for a in airports %}
+                            <div class="dropdown-item" data-code="{{ a.name }}">{{ a.name }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <i class="fi fi-ss-plane"></i>
+
+                <div class="dropdown" id="to-location">
+                    <div class="dropdown-select">
+                        <input type="text" name="to-location" placeholder="To" class="dropdown-value">
+                        <i class="fi fi-rs-angle-down"></i>
+                    </div>
+                    <div class="dropdown-list">
+                        {% for a in airports %}
+                            <div class="dropdown-item" data-code="{{ a.name }}">{{ a.name }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="qty">
+            <label for="customer-qty">Số lượng</label>
+            <input type="number" name="quantity" id="customer-qty" min="1" max="5" value="1">
+        </div>
+        <div class="time">
+            <label for="date-input">Ngày đi</label>
+            <div>
+                <input type="date" id="date-input" name="flight-date">
+            </div>
+        </div>
+
+        <button type="submit" class="btn primary search-btn">TÌM KIẾM <i class="fi fi-rr-search"></i> </button>
+    </form>
+</div>

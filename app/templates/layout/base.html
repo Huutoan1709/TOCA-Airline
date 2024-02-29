@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TOCA Airline</title>
+    <!--    style-->
+    <link rel="icon" href="{{ url_for('static', filename='images/logo-web.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo-web.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+
+</head>
+<body>
+{% include '/layout/header.html' %}
+<div class="top-picture {{ 'home' if home }}">
+    <img src="https://images.unsplash.com/photo-1558285549-2a06f9a5fe65?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+         alt="top picture">
+</div>
+{% block content %}
+{% endblock %}
+{% include '/layout/footer.html' %}
+{% include '/layout/components/flash-message.html' %}
+
+</body>
+</html>

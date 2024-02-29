@@ -1,0 +1,190 @@
+{% extends 'admin/base-admin.html' %}
+
+{% block content %}
+    <div class="stats">
+        <div class="stats-type">
+            <h3>BÁO CÁO THỐNG KÊ </h3>
+        </div>
+        <form method="post" action="/admin/statsview" class="stats-filter">
+            {#            <div class="form-group">#}
+            {#                <label for="route">Chọn tuyến bay</label>#}
+            {#                <div class="dropdown" id="route">#}
+            {#                    <div class="dropdown-select">#}
+            {#                        <input type="text" name="route" placeholder="Chọn tuyến bay" class="dropdown-value">#}
+            {#                        <i class="fi fi-rs-angle-down"></i>#}
+            {#                    </div>#}
+            {#                    <div class="dropdown-list">#}
+            {#                        {% for r in routes %}#}
+            {#                            <div class="dropdown-item" data-code="{{ r }}">{{ r }}</div>#}
+            {#                        {% endfor %}#}
+            {#                    </div>#}
+            {#                </div>#}
+            {#            </div>#}
+
+            <div class="from form-group">
+                <label for="from-data">Xem kết quả từ</label>
+                <input type="date" name="from-date" id="from-data" value="{{ from_date }}">
+            </div>
+            <div class="to form-group">
+                <span>Đến</span>
+                <div class="chose-date">
+                    <div>
+
+                        <input type="radio" name="to" id="current" value="to-now" checked>
+                        <label for="current">Hiện tại</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="to" id="to-date">
+                        <label for="to-date">
+                            <input type="date" name="to-date">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn primary show-btn">Xem kết quả</button>
+        </form>
+
+        {% if empty %}
+            <h3 class="text-center py-5 my-5">Không tìm thấy kết quả phù hợp, Vui lòng thực hiện lại</h3>
+        {% else %}
+            <div class="chart py-5 my-5" id="chart-form">
+                <div class="d-flex align-items-end justify-content-between">
+                    <canvas id="chart-turn" width="40"></canvas>
+                    <canvas id="chart-sale"></canvas>
+                </div>
+            </div>
+
+            <table class="table hide mt-5" id="table-form">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tuyến bay</th>
+                    <th>Lượt bay</th>
+                    <th>Doanh thu</th>
+                    <th>Tỷ lệ doanh thu</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for s in stats %}
+                    <tr>
+                        <td>{{ s[0] }}</td>
+                        <td>{{ s[1] }}</td>
+                        <td>{{ s[2] }}</td>
+                        <td>{{ "{:,.1f}".format( s[3] ) }}</td>
+                        <td>{{ (s[3] / total_sale * 100) | round(2) }} %</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <th scope="col" colspan="2">Tổng cộng:</th>
+                    <th scope="col">{{ total_turn }}</th>
+                    <th scope="row">{{ "{:,.1f}".format( total_sale ) }} VND</th>
+                    <th scope="row">100%</th>
+                </tr>
+                </tbody>
+            </table>
+
+        {% endif %}
+
+
+        <div class="switch-chart">
+            <div>
+                <input type="radio" name="chart-form" id="chart" checked>
+                <label for="chart" onclick="showChart()">Biểu đồ</label>
+            </div>
+            <div>
+                <input type="radio" name="chart-form" id="table">
+                <label for="table" onclick="showTable()">Bảng</label>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ctxTurn = document.getElementById('chart-turn').getContext('2d');
+        const ctxSale = document.getElementById('chart-sale').getContext('2d');
+        colors = []
+        labels = []
+        turn_data = []
+        sale_data = []
+
+
+        {% for s in stats %}
+            colors.push(getRandomColor())
+            labels.push('Tuyến {{ s[1] }}')
+            turn_data.push({{ s[2] }})
+            sale_data.push({{ s[3] }})
+        {% endfor %}
+
+
+        window.addEventListener('load', function () {
+            console.log(ctxTurn, ctxSale)
+            loadChart(ctxTurn, 'bar', labels, turn_data, 'Thống kê số lượt bay theo tuyến bay')
+            loadChart(ctxSale, 'pie', labels, sale_data, 'Thống kê doanh thu theo tuyến bay')
+        })
+
+        function showTable() {
+            chart = document.getElementById('chart-form')
+            table = document.getElementById('table-form')
+            chart.classList.add('hide')
+            table.classList.remove('hide')
+        }
+
+        function showChart() {
+            chart = document.getElementById('chart-form')
+            table = document.getElementById('table-form')
+
+            chart.classList.remove('hide')
+            table.classList.add('hide')
+        }
+
+        function loadChart(ctx, type, labels, data, title) {
+            new Chart(ctx, {
+                type: type,
+                data: {
+                    labels,
+                    datasets: [{
+                        data,
+                        backgroundColor: colors,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            position: 'bottom',
+                            font: {
+                                size: 14,
+                            },
+                            text: title
+                        },
+                        legend: {
+                            display: type!=='bar',
+                            position: 'right',
+                            align: 'start',
+                            title: {
+                                display: true,
+                                text: 'Chú thích'
+                            }
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false, // Tắt tỷ lệ khung hình để bạn có thể tự chỉnh độ rộng và độ cao
+                    width: 800, // Độ rộng mong muốn của biểu đồ
+                }
+            })
+        }
+
+        function getRandomColor() {
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+
+            var rgbColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+
+            return rgbColor;
+        }
+
+
+    </script>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+<div>
+    <section class="main">
+        {% include '/layout/components/flight-search.html'  %}
+
+        <div class="suggestion">
+            <h3>Địa điểm phổ biến</h3>
+            <div class="dest-list">
+                <div class="dest-item">
+                    <div class="dest-wrapper">
+                        <img src="https://bamboo.useleadr.com/uploads/medium_SGN_resize_45ce3292ab.jpg" alt="">
+                        <div class="dest-name">TP. Hồ Chí Minh</div>
+                    </div>
+                </div>
+
+                <div class="dest-item">
+                    <div class="dest-wrapper">
+                        <img src="https://bamboo.useleadr.com/uploads/medium_HAN_3_thumb_6acab9748f.jpg" alt="">
+                        <div class="dest-name">Hà Nội</div>
+                    </div>
+                </div>
+
+                <div class="dest-item">
+                    <div class="dest-wrapper">
+                        <img src="https://bamboo.useleadr.com/uploads/medium_UI_Hthumb_22a09940d4.jpg" alt="">
+                        <div class="dest-name">Quy Nhơn</div>
+                    </div>
+                </div>
+
+                <div class="dest-item">
+                    <div class="dest-wrapper">
+                        <img src="https://bamboo.useleadr.com/uploads/medium_HPH_res_1c80f00781.jpg" alt="">
+                        <div class="dest-name">Hải Phòng</div>
+                    </div>
+                </div>
+
+                <div class="dest-item">
+                    <div class="dest-wrapper">
+                        <img src="https://bamboo.useleadr.com/uploads/medium_THD_res_86e100a54f.jpg" alt="">
+                        <div class="dest-name">Thanh Hoá</div>
+                    </div>
+                </div>
+
+                <div class="dest-item">
+                    <div class="dest-wrapper">
+                        <img src="https://bamboo.useleadr.com/uploads/medium_HUI_res_442bcf4e99.jpg" alt="">
+                        <div class="dest-name">Huế</div>
+                    </div>
+                </div>
+
+                <div class="dest-item">
+                    <div class="dest-wrapper">
+                        <img src="https://bamboo.useleadr.com/uploads/medium_CXR_1_f434952f43.jpg" alt="">
+                        <div class="dest-name">Nha Trang</div>
+                    </div>
+                </div>
+
+                <div class="dest-item">
+                    <div class="dest-wrapper">
+                        <img src="https://bamboo.useleadr.com/uploads/medium_VII_9e7c8acd5b.jpg" alt="">
+                        <div class="dest-name">Vinh</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

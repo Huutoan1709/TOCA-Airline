@@ -1,0 +1,99 @@
+<section class="auth login d-flex justify-content-center">
+  <form action="{{ url_for('login')}}" class="login-form px-5 py-4 rounded" method="post" >
+    <h2>Đăng nhập</h2>
+    <div class="form-group">
+      <label for="email">Username:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter username"
+        id="email"
+        name="username"
+      />
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Enter password"
+        id="pwd"
+        name="password"
+      />
+    </div>
+
+    <button type="submit" class="btn primary login-btn">Đăng nhập</button>
+    <div>
+      Chưa có tài khoản <a class="btn link" onclick="switchForm()">Đăng kí</a>
+    </div>
+  </form>
+
+  <form action="{{ url_for('register') }}" class="register-form hide" method="post" enctype="multipart/form-data">
+    <h2>Đăng ký</h2>
+      <div class="form-group">
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter name"
+        id="name"
+        name="name"
+      />
+    </div>
+      <div class="form-group hor">
+      <label for="name">Avatar:</label>
+      <input
+        type="file"
+        class="form-control"
+        id="name"
+        name="avatar"
+      />
+    </div>
+    <div class="form-group mt-3">
+      <label for="re-username">Username:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter username"
+        id="re-username"
+        name="username"
+      />
+    </div>
+    <div class="form-group">
+      <label for="re-email">Email:</label>
+      <input
+        type="email"
+        class="form-control"
+        placeholder="Enter email"
+        id="re-email"
+        name="email"
+      />
+
+    </div>
+    <div class="form-group">
+      <label for="re-pwd">Password:</label>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Enter password"
+        id="re-pwd"
+        name="password"
+      />
+    </div>
+    <div class="form-group">
+      <label for="re-pwd-again">Confirm password:</label>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Enter password again"
+        id="re-pwd-again"
+        name="confirm_pw"
+      />
+      <span class="text-danger">{{ pw_error}}</span>
+    </div>
+    <button type="submit" class="btn primary">Đăng kí</button>
+    <div>
+      Đã có tài khoản <a class="btn link" onclick="switchForm()">Đăng nhập</a>
+    </div>
+  </form>
+</section>

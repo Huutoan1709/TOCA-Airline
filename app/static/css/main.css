@@ -1,0 +1,738 @@
+header {
+    display: flex;
+    padding: 20px 60px;
+    justify-content: space-between;
+    align-items: center;
+    /*background-color: var(--dark-bg);*/
+    background: rgb(255, 220, 115);
+    background: linear-gradient(146deg, rgba(255, 220, 115, 1) 0%, rgba(0, 192, 89, 1) 34%, rgba(0, 64, 56, 1) 100%);
+}
+
+header .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.logo, .actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--white);
+}
+
+.logo-img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+
+}
+
+ul.navigator {
+    display: flex;
+    gap: 24px;
+    color: var(--white)
+
+}
+
+ul.navigator a {
+    text-decoration: none;
+    color: var(--white);
+
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.actions .logout {
+    font-weight: 400;
+    color: var(--white);
+}
+
+.actions .username {
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+footer {
+    padding: 50px 60px;
+    background-color: var(--dark-bg);
+    color: var(--white);
+    margin-top: 40px;
+}
+
+footer a {
+    color: var(--white);
+}
+
+footer p {
+    margin-top: 2px;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+footer h4 {
+    margin-bottom: 12px;
+}
+
+.main {
+    width: min(1200px, 80%);
+    margin-inline: auto;
+
+}
+
+.top-picture {
+    width: 100%;
+    height: 400px;
+}
+
+.top-picture.home {
+    height: 600px;
+}
+
+.top-picture img {
+    width: 100%;
+    height: 100%;
+    object-position: 0% 10%;
+    object-fit: cover;
+}
+
+.search-flight {
+    margin-top: -100px;
+    background-color: #fff;
+    padding: 40px 60px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+}
+
+.search-flight-home {
+    background-color: rgba(255, 255, 255, 0.7);
+    /*backdrop-filter: brightness(10);*/
+    margin-top: -350px;
+    padding-top: 60px;
+}
+
+.search-flight-home .dropdown-select,
+.search-flight-home input {
+    border-color: var(--main-bg) !important;
+}
+
+.search-flight-home label {
+    font-weight: 400 !important;
+    margin-bottom: 8px !important;
+    padding-left: 4px;
+}
+
+.search-flight .search-btn {
+    width: 200px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+}
+
+.search-flight .greeting {
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--dark-text);
+    border-bottom: 4px solid var(--main-bg);
+}
+
+.search-flight .search {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12px;
+    padding: 20px;
+}
+
+.search-flight label {
+    font-weight: 500;
+}
+
+.search-flight .search label {
+    display: inline-block;
+    margin-bottom: 16px;
+}
+
+.search-flight .location .input-wrapper {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+
+.search-flight .location i {
+    color: var(--main-text);
+    font-size: 24px;
+    height: 20px;
+}
+
+.search-flight .time input {
+    width: 160px;
+}
+
+.search-flight .qty {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.suggestion {
+    margin-top: 120px;
+}
+
+.dest-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.dest-wrapper {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.dest-item {
+    width: 25%;
+    padding: 8px;
+
+}
+
+.dest-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.dest-item .dest-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: linear-gradient(to top, var(--dark-bg), transparent);
+    color: var(--white);
+    font-weight: 600;
+    display: flex;
+    align-items: flex-end;
+    height: 100px;
+    padding: 8px;
+}
+
+/*select flight*/
+
+.page-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 40px;
+}
+
+.select-flight {
+    display: flex;
+    margin-top: 60px;
+    gap: 20px;
+}
+
+.flight-list {
+    width: 60%;
+}
+
+.flight-detail {
+    width: 40%;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.flight-item .brief-info {
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--dark-text);
+    border-radius: 4px;
+    height: 68px;
+}
+
+.flight-item {
+    display: flex;
+    gap: 12px;
+    font-weight: 600;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flight-item + .flight-item {
+    margin-top: 12px;
+}
+
+.flight-item .class.chosen {
+
+}
+
+.flight-item .class-wrapper {
+    height: 68px;
+    flex: 1;
+    width: auto;
+    font-weight: 700;
+    font-size: 20px;
+    display: flex;
+    position: relative;
+    cursor: pointer;
+}
+
+.class-wrapper input:checked + .class {
+    border: 2px solid currentColor;
+    box-shadow: 0 0 10px 2px currentColor;
+}
+
+.class-wrapper .class {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background-color: #cccccc;
+}
+
+.class-wrapper input {
+    width: 1px;
+    height: 1px;
+    visibility: hidden;
+}
+
+.flight-item .luxury {
+    background-color: var(--gold-bg);
+    color: var(--gold-text);
+}
+
+.flight-item .classic {
+    background-color: var(--main-bg);
+    color: var(--dark-text);
+}
+
+.class-wrapper.sold {
+    pointer-events: none !important;
+}
+
+.flight-item .class.sold {
+    background-color: #eee;
+    color: #333;
+
+}
+
+.flight-item .class.sold::before {
+    content: 'Không đủ vé';
+    background-color: #333;
+    color: #eee;
+}
+
+.flight-item .class::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 18px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 4px 0 4px 0;
+}
+
+.flight-item .luxury::before {
+    content: 'Luxury';
+    color: var(--white);
+    background-color: var(--gold-text);
+}
+
+.flight-item .classic::before {
+    content: 'Classic';
+    color: var(--white);
+    background-color: var(--dark-bg);
+}
+
+/* flight detail*/
+.flight-detail .station .path {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    padding: 12px 0 24px;
+    position: relative;
+}
+
+.flight-detail .station .between {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    flex-direction: column;
+    padding: 2px;
+    gap: 2px;
+}
+
+.flight-detail .station .between i {
+    font-size: 14px;
+}
+
+.flight-detail .station .code {
+    font-weight: 600;
+}
+
+.flight-detail .station .between::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    border-top: 1px dashed #333;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.flight-detail h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.flight-detail .termination h3 {
+    margin-top: 12px;
+}
+
+.flight-detail .price {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.flight-detail .price-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flight-detail .price-item span {
+    font-weight: 600;
+}
+
+.flight-detail .price-item.total {
+    border-top: 1px solid #ccc;
+    padding-top: 8px;
+}
+
+.flight-detail .price-item.total span {
+    color: red;
+}
+
+/* passenger form*/
+
+.passenger-form {
+    margin-top: 20px;
+    padding: 40px 120px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: var(--light-bg);
+}
+
+.passenger-info {
+    margin-top: 60px;
+}
+
+.personal {
+    padding: 20px 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.personal > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact {
+    padding: 20px 0;
+    border-top: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.personal h3,
+.contact h3 {
+    margin-top: 16px;
+    font-size: 18px;
+}
+
+#nationality {
+    width: 100%;
+}
+
+.passenger-info .type,
+.passenger-info .gender {
+    width: 40%;
+    display: flex;
+    gap: 12px;
+}
+
+.contact > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* payment */
+.payment {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    width: 100%;
+}
+
+.payment .payment-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 60%;
+    padding: 20px 40px;
+
+}
+
+.payment button {
+    margin-top: 16px;
+}
+
+.payment .bill {
+    padding: 20px 40px;
+    flex: 1
+}
+
+.payment .bill ul {
+    margin-top: 60px;
+}
+
+.payment .bill li {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.payment .bill .qty {
+    font-weight: 600;
+}
+
+.payment .bill .total {
+    padding-top: 12px;
+    border-top: 1px dashed #ccc;
+}
+
+.payment .bill .money {
+    font-weight: 600;
+    color: red;
+}
+
+.payment .card-img img {
+    width: 100%;
+}
+
+.payment .date-cvv {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+/* result*/
+.payment-result {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    padding: 60px;
+}
+
+.payment-result img {
+    width: 300px;
+    height: 300px;
+}
+
+.payment-result button {
+    margin-top: 40px;
+}
+
+.history {
+    margin-top: -200px;
+    background-color: var(--white);
+    padding: 40px 80px;
+    width: 1200px;
+    margin-inline: auto;
+    position: relative;
+    z-index: 1;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+
+}
+
+.history h3 {
+    margin-top: 24px;
+}
+
+.ticket-list {
+    margin-top: 60px;
+}
+
+.ticket-item .header,
+.ticket-item .footer {
+    padding: 12px 24px;
+    color: var(--white);
+    text-transform: uppercase;
+}
+
+.ticket-item.classic .header,
+.ticket-item.classic .footer {
+    background-color: var(--dark-bg);
+}
+
+.ticket-item.luxury .header,
+.ticket-item.luxury .footer {
+    background-color: var(--gold-text);
+}
+
+.ticket-item {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.ticket-item.classic {
+    border: 2px solid var(--dark-bg);
+}
+
+.ticket-item.luxury {
+    border: 2px solid var(--gold-text);
+}
+
+.ticket-item .body {
+    display: flex;
+    justify-content: stretch;
+    padding: 30px 40px;
+}
+
+.ticket-item .body > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+}
+
+.ticket-item .customer-info {
+    width: 30%;
+    padding: 12px 24px;
+
+}
+
+.ticket-item .from,
+.ticket-item .to {
+    width: 35%;
+    padding: 0 30px;
+    border-left: 2px dashed #ccc;
+}
+
+/* profile*/
+
+.profile {
+    padding: 50px 100px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile .avatar {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    padding: 30px 40px;
+}
+
+.profile .avatar img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.profile .infor {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 600px;
+    padding: 30px 40px;
+}
+
+.profile .label {
+    font-weight: 600;
+}
+
+.profile .value {
+    border: 1px solid #ccc;
+    text-align: right;
+}
+
+.profile .value[readonly] {
+    border: none;
+
+}
+
+.profile .infor > div {
+    padding: 4px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-file-input {
+    color: transparent;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.custom-file-input::before {
+    content: 'Cập nhật avatar';
+    display: inline-block;
+    width: 100%;
+    color: var(--dark-bg);
+    padding: 8px 16px;
+    background-color: var(--light-bg);
+    border-radius: 3px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+
+.custom-file-input:active {
+    outline: 0;
+}
+
+.custom-file-input:active::before {
+    color: var(--main-bg);
+}

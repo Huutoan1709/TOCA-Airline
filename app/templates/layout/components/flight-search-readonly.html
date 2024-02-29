@@ -1,0 +1,47 @@
+<div class="search-flight">
+                <div class="search">
+                    <div class="location">
+                        <label for="from-location">Địa điểm</label>
+                        <div class="input-wrapper">
+
+                            <div class="dropdown" id="from-location">
+                              <div class="dropdown-select">
+                                <input type="text"
+                                       name="from-location"
+                                       class="dropdown-value"
+                                       value="{{ session['order']['from'] }}"
+                                >
+                              </div>
+                                <div>
+                                    <div></div>
+                              </div>
+                            </div>
+
+                            <i class="fi fi-ss-plane"></i>
+
+                            <div class="dropdown" id="to-location">
+                              <div class="dropdown-select">
+                                  <input type="text"
+                                         name="to-location"
+                                         class="dropdown-value"
+                                         value="{{ session['order']['to'] }}">
+                              </div>
+                                 <div>
+                                    <div></div>
+                              </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="qty">
+                            <label for="customer-qty">Số lượng</label>
+                        <input type="number" name="quantity" id="customer-qty" min="1" max="5" value="{{session['order']['quantity']}}" readonly>
+                    </div>
+                    <div class="time">
+                        <label for="date-input">Ngày đi</label>
+                        <div>
+                            <input type="date" id="date-input" value="{{session['order']['flight_date']}}" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>

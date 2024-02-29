@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TOCA Airline</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/logo-web.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo-web.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+{% include '/layout/header.html' %}
+
+<div class="payment-result ">
+    {% if status=='success' %}
+        <img src="{{ url_for('static', filename='/images/thumbnail.jfif') }}" alt="">
+
+        <h3>Đơn hàng đã được thanh toán thành công</h3>
+
+        <a href="/{{ next if next else '' }}" class="btn primary">Trở về </a>
+    {% else %}
+        <img src="{{ url_for('static', filename='/images/fail.jfif') }}" alt="">
+
+        <h3>Thanh toán thất bại</h3>
+
+        <a href="/{{ next if next else '' }}" class="btn primary">Thử lại</a>
+    {% endif %}
+
+
+</div>
+{% include '/layout/footer.html' %}
+
+
+</body>
+</html>
